@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Send, Mic, MicOff } from 'lucide-react';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/final-logo.svg';
 
 interface Message {
   id: string;
@@ -155,8 +155,8 @@ export default function SymptomCheckerChat({ onComplete, onBack }: SymptomChecke
           <ArrowLeft className="w-5 h-5 text-white" />
         </button>
         <div className="flex items-center gap-2.5 flex-1">
-          <div className="w-9 h-9 bg-[#1A1A1A] rounded-xl flex items-center justify-center">
-            <img src={logo} alt="UrgentCareX" className="w-6 h-6" />
+          <div className="w-9 h-9 bg-[#1A1A1A] rounded-full flex items-center justify-center shadow-sm">
+            <img src={logo} alt="UrgentCareX" className="w-7 h-7" />
           </div>
           <div>
             <h2 className="text-[15px] font-semibold text-white leading-tight">Care Navigation Tool</h2>
@@ -186,8 +186,8 @@ export default function SymptomCheckerChat({ onComplete, onBack }: SymptomChecke
               <div className="max-w-[80%]">
                 {message.sender === 'ai' && (
                   <div className="flex items-center gap-2 mb-1.5">
-                    <div className="w-7 h-7 bg-[#1A1A1A] rounded-lg flex items-center justify-center">
-                      <img src={logo} alt="UrgentCareX" className="w-5 h-5" />
+                    <div className="w-7 h-7 bg-[#D72638] rounded-full flex items-center justify-center shadow-sm">
+                      <img src={logo} alt="UrgentCareX" className="w-4 h-4" />
                     </div>
                     <span className="text-[11px] text-[#9CA3AF] font-medium">UrgentCareX</span>
                   </div>

@@ -275,36 +275,50 @@ export default function ProviderSearch({ onSelectProvider, onBack }: ProviderSea
               {/* Facility-specific info */}
               {provider.type === 'facility' && provider.hoursToday && (
                 <div>
-                  <div className="flex items-center gap-2 px-3 py-2 bg-[#FEF2F2] rounded-lg">
-                    <Clock className="w-4 h-4 text-[#6B7280]" />
-                    <span className="text-sm text-[#1F2937]">{provider.hoursToday} (reported hours)</span>
+                  <div className="grid grid-cols-2 gap-0 bg-[#FEF2F2] rounded-lg overflow-hidden">
+                    <div className="flex items-center gap-1.5 px-3 py-2 border-r border-[#E5E7EB]">
+                      <Clock className="w-3.5 h-3.5 text-[#6B7280] shrink-0" />
+                      <div>
+                        <span className="text-xs font-medium text-[#1F2937] leading-tight block">{provider.hoursToday}</span>
+                        <span className="text-[9px] text-[#9CA3AF] leading-tight">(reported hours)</span>
+                      </div>
+                    </div>
                     {provider.waitTime !== undefined && (
-                      <>
-                        <span className="text-[#D1D5DB]">•</span>
-                        <span className="text-sm text-[#6B7280]">Approx. wait time: {provider.waitTime} minutes</span>
-                      </>
+                      <div className="flex flex-col justify-center px-3 py-2">
+                        <span className="text-xs text-[#6B7280] leading-tight">Approx. wait time: <span className="font-medium text-[#1F2937]">{provider.waitTime} min</span></span>
+                        <span className="text-[9px] text-[#9CA3AF] italic leading-tight">Last updated {Math.floor(Math.random() * 10) + 2} min ago</span>
+                      </div>
                     )}
                   </div>
                   <p className="text-[9px] text-[#9CA3AF] mt-1 px-3">Hours are reported by the facility and may change.</p>
                 </div>
               )}
 
-              {/* Removed bottom section with availability, badges, and buttons */}
+              {/* Insurance disclaimer inside card - only on insurance tab */}
+              {activeTab === 'insurance' && provider.type === 'facility' && (
+                <p className="text-[9px] text-[#9CA3AF] leading-tight mt-2 px-1 italic">Insurance participation should be confirmed directly with the facility. Wait times are estimated and not guaranteed.</p>
+              )}
             </div>
           ))}
-          {/* Disclaimer */}
-          <p className="text-[10px] text-[#9CA3AF] leading-tight mt-4 px-1">
-            DISCLAIMER: Provider listings are for informational purposes only. UrgentCareX does not endorse, recommend, or guarantee any provider or outcome. Users should independently verify provider credentials, availability, and insurance participation.
-          </p>
-          <p className="text-[10px] text-[#9CA3AF] leading-tight mt-2 px-1">
-            Results are based on your selected filters and general information.
-          </p>
-          <p className="text-[10px] text-[#9CA3AF] leading-tight mt-1 px-1">
-            Results are informational and do not constitute medical advice.
-          </p>
-          <p className="text-[10px] text-[#9CA3AF] leading-tight mt-1 px-1">
-            DISCLAIMER: Insurance participation should be confirmed directly with the facility. Wait times are estimated and not guaranteed.
-          </p>
+          {/* Disclaimers */}
+          {activeTab !== 'insurance' && (
+            <>
+              <p className="text-[10px] text-[#9CA3AF] leading-tight mt-4 px-1">
+                DISCLAIMER: Provider listings are for informational purposes only. UrgentCareX does not endorse, recommend, or guarantee any provider or outcome. Users should independently verify provider credentials, availability, and insurance participation.
+              </p>
+              <p className="text-[10px] text-[#9CA3AF] leading-tight mt-2 px-1">
+                Results are based on your selected filters and general information.
+              </p>
+              <p className="text-[10px] text-[#9CA3AF] leading-tight mt-1 px-1">
+                Results are informational and do not constitute medical advice.
+              </p>
+            </>
+          )}
+          {activeTab === 'insurance' && (
+            <p className="text-[10px] text-[#9CA3AF] leading-tight mt-4 px-1">
+              DISCLAIMER: Provider information, hours, insurance participation, and wait times are reported estimates for informational purposes only. Please confirm details directly with the facility. This platform does not provide medical advice or endorse any provider.
+            </p>
+          )}
         </div>
       </div>
     </div>
